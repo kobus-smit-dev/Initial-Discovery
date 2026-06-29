@@ -348,7 +348,47 @@
     .method h2 { margin-top:0; color: var(--warm-ink); }
     @media (max-width: 900px) { .evidence-grid { grid-template-columns:1fr; } }
     @media (max-width: 780px) { .thesis-grid { grid-template-columns:1fr; } }
-</style>
+
+    .appendix-cta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px 28px;
+      box-shadow: 0 14px 44px rgba(21,33,30,.06);
+      margin-top: 18px;
+    }
+    .appendix-cta h3 {
+      margin: 0 0 4px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+    .appendix-cta p {
+      margin: 0;
+      color: var(--muted);
+    }
+    .appendix-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      color: white;
+      background: var(--accent);
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 750;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(15,91,85,.18);
+    }
+    .appendix-cta a:hover { background: var(--accent-2); }
+    @media (max-width: 700px) {
+      .appendix-cta { flex-direction: column; align-items: flex-start; }
+    }
+
+  </style>
 </head>
 <body>
   <main class="page">
@@ -463,10 +503,21 @@
       </div>
     </section>
 
+
+    <section>
+      <div class="appendix-cta">
+        <div>
+          <h3>Anhang: Interview Reports</h3>
+          <p>Die beiden anonymisierten Einzelberichte als unterstützender Kontext.</p>
+        </div>
+        <a href="interview-reports.html">Reports ansehen</a>
+      </div>
+    </section>
+
     <section class="footer-note">
       <h2>Fazit</h2>
       <p>Die Gespräche deuten auf eine starke Ausgangsposition hin: ORCA ist in der Kundenwahrnehmung sehr etabliert. Die nächsten produktseitigen Hebel scheinen weniger im reinen Funktionsausbau zu liegen, sondern in der Vereinfachung bestehender Workflows, besseren Integrationen und gezielter KI-Unterstützung im Kernprozess.</p>
-      <div class="appendix">Executive Brief · Customer Discovery Notes · Juni 2026 · Anhang: Interview Report A · Interview Report B</div>
+      <div class="appendix">Executive Brief · Customer Discovery Notes · Juni 2026 · Anhang separat verfügbar</div>
     </section>
   </main>
 </body>
