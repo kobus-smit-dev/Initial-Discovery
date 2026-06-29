@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Erste Kundenperspektiven - Executive Brief</title>
+  <style>
+    :root {
+      --bg: #f5f7f5;
+      --paper: #ffffff;
+      --ink: #15211e;
+      --muted: #65716d;
+      --line: #dde5e1;
+      --line-soft: #edf1ef;
+      --accent: #0f5b55;
+      --accent-2: #1d7870;
+      --accent-soft: #e7f2ef;
+      --warm: #f4efe5;
+      --warm-ink: #493f33;
+      --shadow: 0 22px 70px rgba(21,33,30,.08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; hyphens: auto; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 20% 0%, #fff 0, #f5f7f5 42%, #eef4f1 100%);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .page {
+      width: min(100%, 1040px);
+      margin: 0 auto;
+      padding: 72px 36px 96px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(255,255,255,.98) 0%, #f7faf8 58%, #eaf3f0 100%);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: clamp(36px, 6vw, 72px);
+      box-shadow: var(--shadow);
+      margin-bottom: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero:after {
+      content:"";
+      position: absolute;
+      right: -140px;
+      bottom: -160px;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: rgba(15,91,85,.07);
+    }
+    .eyebrow {
+      position: relative;
+      z-index: 1;
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 28px;
+    }
+    h1 {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(44px, 7vw, 76px);
+      letter-spacing: -0.06em;
+      line-height: .95;
+      margin: 0 0 24px;
+      max-width: 760px;
+      font-weight: 760;
+    }
+    .subtitle {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(18px, 2.4vw, 23px);
+      color: var(--muted);
+      max-width: 680px;
+      margin: 0 0 48px;
+      letter-spacing: -0.02em;
+    }
+    .meta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: rgba(255,255,255,.72);
+      white-space: nowrap;
+    }
+
+    section {
+      margin: 28px 0;
+      background: rgba(255,255,255,.96);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: clamp(26px, 4vw, 40px);
+      box-shadow: 0 12px 42px rgba(21,33,30,.045);
+    }
+    h2 {
+      font-size: clamp(26px, 3vw, 34px);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+      margin: 0 0 18px;
+    }
+    h3 {
+      font-size: clamp(24px, 3vw, 34px);
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+      margin: 0 0 18px;
+      max-width: 780px;
+    }
+    p { margin: 0 0 14px; }
+    p:last-child { margin-bottom: 0; }
+    .lead { font-size: 18px; color: #34403d; max-width: 760px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .person {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+    }
+    .person strong { display:block; font-size: 18px; margin-bottom: 8px; }
+    .person span { color: var(--muted); }
+
+    .nps {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: 16px;
+      margin-top: 18px;
+      align-items: stretch;
+    }
+    .nps-card {
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      padding: 22px;
+      background: var(--bg);
+      min-width: 0;
+    }
+    .nps-card strong { display: block; margin-bottom: 8px; }
+    .score-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: nowrap; margin: 6px 0 10px; }
+    .score-main {
+      font-size: clamp(44px, 7vw, 62px);
+      line-height: .9;
+      letter-spacing: -0.06em;
+      color: var(--accent);
+      font-weight: 780;
+      white-space: nowrap;
+    }
+    .score-max { color: var(--muted); font-weight: 650; white-space: nowrap; }
+    .pending { color: var(--muted); font-size: 24px; font-weight: 650; margin: 10px 0; }
+    .reason { font-size: 17px; color: #24312e; hyphens: manual; }
+
+    .cards { display: grid; gap: 20px; }
+    .observation {
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: clamp(28px, 4vw, 40px);
+      position: relative;
+      overflow: hidden;
+    }
+    .observation:before {
+      content:"";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 7px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    }
+    .tag {
+      display: inline-block;
+      min-width: 38px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: .10em;
+      font-weight: 850;
+      margin-bottom: 18px;
+    }
+    .quote {
+      margin: 26px 0 4px;
+      display: grid;
+      gap: 12px;
+    }
+    .quote-line {
+      font-size: clamp(23px, 3vw, 33px);
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+      color: var(--accent);
+      font-weight: 740;
+      display: flex;
+      align-items: flex-start;
+      max-width: 100%;
+    }
+    .quote-line .qmark {
+      flex: 0 0 auto;
+      width: .52em;
+      margin-left: -.02em;
+    }
+    .quote-line .qtext {
+      min-width: 0;
+    }
+    .takeaway {
+      margin-top: 24px;
+      padding: 16px 18px;
+      background: var(--accent-soft);
+      border-radius: 18px;
+      color: #183b37;
+      font-weight: 660;
+      border: 1px solid rgba(15,91,85,.09);
+    }
+    ul { margin: 10px 0 0 20px; padding: 0; }
+    li { margin: 6px 0; }
+    .compact-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 18px 0 0;
+    }
+    .chip {
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: var(--warm);
+      color: var(--warm-ink);
+      font-size: 14px;
+      font-weight: 680;
+      white-space: nowrap;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+    .comparison-card {
+      border: 1px solid var(--line);
+      background: var(--bg);
+      border-radius: 22px;
+      padding: 22px;
+    }
+    .comparison-card h3 { font-size: 22px; margin-bottom: 14px; }
+    .compare-row {
+      display: grid;
+      grid-template-columns: minmax(90px, .75fr) minmax(0, 1fr);
+      gap: 12px;
+      padding: 11px 0;
+      border-top: 1px solid var(--line-soft);
+    }
+    .compare-row:first-of-type { border-top: 0; }
+    .compare-row b {
+      color: var(--accent);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+    }
+    .compare-row span { color: #34403d; min-width: 0; overflow-wrap: break-word; hyphens: auto; }
+
+    .questions {
+      columns: 2;
+      column-gap: 36px;
+    }
+    .questions li { break-inside: avoid; margin-bottom: 10px; }
+
+    .footer-note {
+      background: #15211e;
+      color: #f5f8f6;
+      border: none;
+    }
+    .footer-note h2 { color: #fff; }
+    .footer-note p { color: #d8dfdc; font-size: 18px; max-width: 820px; }
+    .appendix { color: #aebbb7; font-size: 14px; margin-top: 26px; }
+
+    @media (max-width: 840px) {
+      .page { padding: 28px 18px 54px; }
+      .hero, section { border-radius: 22px; }
+      .grid-2, .nps, .comparison { grid-template-columns: 1fr; }
+      .questions { columns: 1; }
+      h1 { font-size: 44px; }
+      .quote-line { font-size: 23px; }
+    }
+
+    @page { size: A4; margin: 14mm; }
+    @media print {
+      body { background: #fff; }
+      .page { width: auto; max-width: none; padding: 0; }
+      .hero, .observation, .nps-card, .person, .comparison-card { box-shadow: none; break-inside: avoid; }
+      section { break-inside: auto; }
+      section { break-inside: auto; }
+      .hero { padding: 34px; }
+      section { padding: 22px 24px; margin: 12px 0; border-radius: 18px; }
+      h1 { font-size: 50px; }
+      h2 { font-size: 24px; }
+      h3 { font-size: 22px; }
+      .subtitle { font-size: 17px; }
+      .lead, .footer-note p { font-size: 15px; }
+      .observation { padding: 24px 26px; border-radius: 18px; }
+      .quote-line { font-size: 20px; }
+      .evidence-card h3 { font-size: 20px; }
+      .takeaway { padding: 12px 14px; }
+      .comparison { grid-template-columns: 1fr 1fr; }
+      .tag { display: inline-block; width: auto; height: auto; padding: 4px 10px; min-width: 0; }
+      .compact-list { gap: 6px; }
+      .chip { font-size: 12px; padding: 5px 9px; }
+      .compare-row { grid-template-columns: 78px 1fr; gap: 8px; }
+      .questions { columns: 1; }
+    }
+  
+    .answer-box {
+      background: #10231f;
+      color: #fff;
+      border-radius: 30px;
+      padding: clamp(34px, 5vw, 56px);
+      margin: 34px 0;
+      box-shadow: var(--shadow);
+    }
+    .answer-box h2 { color:#fff; margin-top:0; max-width: 900px; }
+    .answer-box .big-answer { font-size: clamp(26px, 4vw, 43px); line-height:1.12; letter-spacing:-.04em; margin: 18px 0 0; font-weight: 800; max-width: 960px; }
+    .answer-box p { color:#d9e3df; max-width: 880px; }
+    .thesis-grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; margin-top:24px; }
+    .thesis { background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.13); border-radius:20px; padding:20px; }
+    .thesis b { display:block; color:#fff; font-size:18px; margin-bottom:6px; }
+    .thesis span { color:#c9d6d1; font-size:14px; }
+    .evidence-grid { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:22px; }
+    .evidence-card { background: var(--paper); border:1px solid var(--line); border-radius:26px; padding:32px; box-shadow:0 16px 50px rgba(21,33,30,.05); }
+    .evidence-card h3 { margin-top:0; font-size: clamp(25px, 2.55vw, 31px); line-height: 1.12; letter-spacing:-0.045em; }
+    .evidence-card p { font-size: 17px; }
+    .signal { display:inline-flex; align-items:center; gap:8px; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color: var(--accent); font-weight:800; margin-bottom:12px; }
+    .implication { margin-top:18px; padding-top:18px; border-top:1px solid var(--line-soft); color:var(--muted); font-weight:650; }
+    .method { background: var(--warm); border:1px solid #e7dccb; border-radius:26px; padding:30px; color:var(--warm-ink); }
+    .method h2 { margin-top:0; color: var(--warm-ink); }
+    @media (max-width: 900px) { .evidence-grid { grid-template-columns:1fr; } }
+    @media (max-width: 780px) { .thesis-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="eyebrow">Executive Brief</div>
+      <h1>Erste Kunden&shy;perspektiven</h1>
+      <p class="subtitle">Kernaussagen aus Gesprächen mit langjährigen ORCA-Anwendern</p>
+      <div class="meta">
+        <span class="pill">Kobus Smit</span>
+        <span class="pill">Juni 2026</span>
+      </div>
+    </header>
+
+    <section class="answer-box">
+      <h2>Kernaussage</h2>
+      <div class="big-answer">ORCA wird als Marktführer wahrgenommen. Der größte Produkthebel liegt aus Kundensicht derzeit eher in einfacheren Workflows, besserer Integration und KI im Kernprozess als in zusätzlichem Funktionsumfang.</div>
+      <p>Cloud wird grundsätzlich akzeptiert, aber in diesen Gesprächen kaum als eigenständiger Kundennutzen wahrgenommen.</p>
+      <div class="thesis-grid">
+        <div class="thesis"><b>Starke Ausgangsposition</b><span>Beide Gesprächspartner beschreiben ORCA als Referenzlösung.</span></div>
+        <div class="thesis"><b>Hebel im Bestand</b><span>Die Wünsche richten sich auf Vereinfachung, UX und Integration.</span></div>
+        <div class="thesis"><b>KI konkret</b><span>Erwartet wird Unterstützung in Ausschreibung und LV-Erstellung.</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Die fünf Signale</h2>
+      <div class="evidence-grid">
+        <article class="evidence-card">
+          <div class="signal">01 · Marktführerschaft</div>
+          <h3>ORCA wird als Marktführer wahrgenommen.</h3>
+          <p>Beide Gesprächspartner beschrieben ORCA unabhängig voneinander als Marktführer bzw. De-facto-Standard.</p>
+          <div class="quote"><div class="quote-line"><span class="qmark">„</span><span class="qtext">Da kommt man nicht drum herum.“</span></div><div class="quote-line"><span class="qmark">„</span><span class="qtext">Marktführer.“</span></div></div>
+          <div class="implication">Implikation: Die Marke startet aus einer sehr starken Vertrauensposition.</div>
+        </article>
+        <article class="evidence-card">
+          <div class="signal">02 · Workflow vor Features</div>
+          <h3>Die wichtigsten Wünsche betreffen bestehende Arbeitsabläufe.</h3>
+          <p>Genannt wurden Formularanpassungen, Kostenverfolgung, Benutzeroberfläche und CAD-Integration.</p>
+          <div class="compact-list"><span class="chip">Formularanpassungen</span><span class="chip">Kostenverfolgung</span><span class="chip">Benutzeroberfläche</span><span class="chip">CAD-Integration</span></div>
+          <div class="implication">Implikation: Der wahrgenommene Hebel liegt in Vereinfachung, Bedienbarkeit und Integration.</div>
+        </article>
+        <article class="evidence-card">
+          <div class="signal">03 · Cloud</div>
+          <h3>Cloud wird derzeit kaum als Kundennutzen wahrgenommen.</h3>
+          <p>Beide Gesprächspartner waren offen gegenüber Cloud, verbanden damit aber keinen unmittelbaren Mehrwert im eigenen Arbeitsalltag.</p>
+          <div class="quote"><div class="quote-line"><span class="qmark">„</span><span class="qtext">Solange die Software macht, was sie soll, ist mir das eigentlich egal.“</span></div></div>
+          <div class="implication">Implikation: Cloud braucht ein klareres Nutzenversprechen als nur ein neues Bereitstellungsmodell.</div>
+        </article>
+        <article class="evidence-card">
+          <div class="signal">04 · KI</div>
+          <h3>KI wird als Beschleuniger im Kernprozess verstanden.</h3>
+          <p>Ein Gesprächspartner nannte die KI-gestützte Erstellung von Leistungsverzeichnissen; die andere wünschte KI-Unterstützung bei Ausschreibungen direkt in ORCA und nutzt BauGPT bereits heute.</p>
+          <div class="implication">Implikation: KI sollte in bestehende Workflows eingebettet sein, nicht als separates Produkt danebenstehen.</div>
+        </article>
+        <article class="evidence-card">
+          <div class="signal">05 · Integration</div>
+          <h3>Integration wirkt als Multiplikator.</h3>
+          <p>ORCA wird nicht isoliert betrachtet, sondern als Teil eines Werkzeug-Ökosystems aus CAD, Bibliotheken, BIM und Schnittstellen.</p>
+          <div class="compact-list"><span class="chip">CAD</span><span class="chip">Bibliotheken</span><span class="chip">BIM</span><span class="chip">Schnittstellen</span></div>
+          <div class="implication">Implikation: Produktwert entsteht auch an den Übergängen zu angrenzenden Systemen.</div>
+        </article>
+        <article class="evidence-card">
+          <div class="signal">NPS · erster Indikator</div>
+          <h3>Weiterempfehlungsbereitschaft fällt positiv aus.</h3>
+          <div class="nps-card" style="box-shadow:none; margin-top:10px;">
+            <strong>Interviewpartnerin B</strong>
+            <div class="score-row"><span class="score-main">9</span><span class="score-max">/ 10</span></div>
+            <p class="reason">„Leicht verständlich auch für Nicht&#8209;Planer.“</p>
+          </div>
+          <p style="color:var(--muted); margin-top:12px;">Interviewpartner A: Antwort ausstehend.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Unterschiede, die relevant sind</h2>
+      <div class="comparison">
+        <div class="comparison-card">
+          <h3>Interviewpartner A</h3>
+          <div class="compare-row"><b>UX</b><span>kritisch</span></div>
+          <div class="compare-row"><b>Preis</b><span>„eigentlich schon teuer“</span></div>
+          <div class="compare-row"><b>KI</b><span>Leistungsverzeichnisse</span></div>
+          <div class="compare-row"><b>Wunsch</b><span>UX vereinfachen</span></div>
+        </div>
+        <div class="comparison-card">
+          <h3>Interviewpartnerin B</h3>
+          <div class="compare-row"><b>UX</b><span>positiv</span></div>
+          <div class="compare-row"><b>Preis</b><span>zufrieden</span></div>
+          <div class="compare-row"><b>KI</b><span>Ausschreibungen</span></div>
+          <div class="compare-row"><b>Wunsch</b><span>CAD-Integration</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Fragen für die nächste Vertiefung</h2>
+      <ul class="questions">
+        <li>Wie konsistent ist die wahrgenommene Marktführerschaft über verschiedene Kundensegmente?</li>
+        <li>Welche Supportthemen entstehen durch UX- oder Bedienungskomplexität?</li>
+        <li>Welche Kundensegmente verbinden heute bereits einen konkreten Mehrwert mit der Cloud?</li>
+        <li>Welche KI-Anwendungsfälle liefern kurzfristig den größten Produktivitätsgewinn?</li>
+        <li>Welche Rolle spielen Integrationen im Vergleich zu neuen Funktionen?</li>
+      </ul>
+    </section>
+
+    <section class="method">
+      <h2>Vorgehen</h2>
+      <p>Zwei kurze, informelle Gespräche mit langjährigen ORCA-Anwendern aus unabhängigen Architekturbüros. Ziel war keine repräsentative Bewertung, sondern ein erstes qualitatives Verständnis von Kundenwahrnehmung, Nutzen, Reibungspunkten und möglichen Produkthebeln.</p>
+      <div class="grid-2">
+        <div class="person"><strong>Interviewpartner A</strong><span>Partner eines Architekturbüros<br>10+ Jahre ORCA-Erfahrung</span></div>
+        <div class="person"><strong>Interviewpartnerin B</strong><span>Inhaberin eines Architekturbüros<br>4 Mitarbeitende · langjährige ORCA-Anwenderin</span></div>
+      </div>
+    </section>
+
+    <section class="footer-note">
+      <h2>Fazit</h2>
+      <p>Die Gespräche deuten auf eine starke Ausgangsposition hin: ORCA ist in der Kundenwahrnehmung sehr etabliert. Die nächsten produktseitigen Hebel scheinen weniger im reinen Funktionsausbau zu liegen, sondern in der Vereinfachung bestehender Workflows, besseren Integrationen und gezielter KI-Unterstützung im Kernprozess.</p>
+      <div class="appendix">Executive Brief · Customer Discovery Notes · Juni 2026 · Anhang: Interview Report A · Interview Report B</div>
+    </section>
+  </main>
+</body>
+</html>
